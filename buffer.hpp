@@ -16,7 +16,6 @@ const char *shm_name = "/producer_consumer_buffer";
 
 // Semaphore Names
 const char *sem_empty = "/pc_empty_sem";
-const char *sem_mutex = "/pc_mutext_sem";
 const char *sem_full = "/pc_full_sem";
 
 // Buffer Size
