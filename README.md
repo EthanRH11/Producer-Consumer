@@ -58,5 +58,10 @@ This will send a termination signal to both processes, allowing them to clean up
 - The buffer size is defined by `TABLESIZE` in the memorybuff.hpp header file.
 - Each program handles signals to allow for graceful termination.
 
+## Tech Stack
+- C++
+- Makefile
+- gcc
+
 ## Author
 Ethan Hicks
