@@ -1,13 +1,26 @@
-CC = gcc
-CFLAGS = pthread -lrt
+CC = g++
+CFLAGS = -Wall -g
+LDFLAGS = -pthread -lrt
+INCLUDES = -I./Include 
+SRC_DIR = src
+TARGET_CONSUMER = consumer
+TARGET_PRODUCER = producer
 
-all: producer consumer
+all: $(TARGET_CONSUMER) $(TARGET_PRODUCER)
 
-producer: producer.cpp
-	$(CC) producer.cpp $(CFLAGS) -o producer
+$(TARGET_CONSUMER): $(SRC_DIR)/consumer.o
+	$(CC) $(CFLAGS) -o $(TARGET_CONSUMER) $(SRC_DIR)/consumer.o $(LDFLAGS)
 
-consumer: consumer.cpp
-	$(CC) producer.cpp $(CFLAGS) -o consumer
+$(TARGET_PRODUCER): $(SRC_DIR)/producer.o
+	$(CC) $(CFLAGS) -o $(TARGET_PRODUCER) $(SRC_DIR)/producer.o $(LDFLAGS)
+
+$(SRC_DIR)/consumer.o: $(SRC_DIR)/consumer.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) -c $(SRC_DIR)/consumer.cpp -o $(SRC_DIR)/consumer.o
+
+$(SRC_DIR)/producer.o: $(SRC_DIR)/producer.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) -c $(SRC_DIR)/producer.cpp -o $(SRC_DIR)/producer.o
 
 clean:
-	rm -f producer consumer
+	rm -f $(SRC_DIR)/*.o $(TARGET_CONSUMER) $(TARGET_PRODUCER)
+
+.PHONY: all clean
